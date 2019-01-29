@@ -1,0 +1,60 @@
+V-if , V-for ,V-else
+
+V-if 예제
+<div id='if_ex'>
+		<input type='text' @keyDown='key_ev'>
+		<p v-if='see' > {{ result_message }} </p>
+</div>
+
+<script>
+	var see_ex = new Vue({
+		el:'#if_ex',
+		data:{
+		see:'false',
+		result_message:'지금은 보이지 않습니다'
+		},
+		methods:{
+			key_ev:function(e){
+				console.log(e.key);
+				see='true';
+				
+				this.result_message = this.result_message+e.key;
+
+			}
+
+		}
+
+	})
+</script>
+
+
+V-for 예제
+<div id='for_ex'>
+	<ul>
+		<li v-for=' item in temp'>
+	  {{ item.text}}
+		</li>
+	</ul>
+</div>
+
+<script>
+var for_list = new Vue({
+	el:'#for_ex',
+	data:{
+		temp:[
+					{
+						text : 'for문 예제'
+						
+					},
+					{
+						text : '기본구조'
+						
+					},
+					{
+						text : '입니다.'
+						
+					},
+				]
+	}
+})
+</script>
