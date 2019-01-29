@@ -1,0 +1,32 @@
+컴포넌트를 사용한 작성방법( Vue 의 중요한 개념 )
+ Vue에서 컴포넌트는  본질적으로 미리 정의된 옵션을 가진 Vue 인스턴스이다.
+ 컴포넌트는 재사용이 가능하며 추상적 개념이다.
+
+
+간단한 적용 예시 ) 
+
+
+<div id= 'com_ex'>
+	<component-count></component-count>  //user component
+	<component-count></component-count>
+	<component-count></component-count>
+</div>
+
+var data = { counter : 0}  // click 에 대해 리턴시킬 데이터 
+
+Vue.component('component-count',{   // 사용자 컴포넌트 이름 설정 
+	
+	template:'<button @click='counter+1'>{{ counter }}</button>',
+	data:function(){
+
+			return data
+
+	}
+
+})
+
+new Vue({
+		el:'#example-2'
+
+})
+
