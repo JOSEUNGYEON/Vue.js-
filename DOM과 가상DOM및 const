@@ -1,0 +1,34 @@
+var 와 let,const
+
+let과 const 가 사용된 이유 
+ 
+ 함수범위인 var 를 사용중 호이스팅으로 인해 변수value가 엉키는 경우 발생
+ let.과 const는 블럭 범위로 그 문제를 해결했다.
+ let과 const 는 재선언이 불가능하며 const는 재할당도 불가능하다.
+ 
+ DOM 과 가상DOM의 차이.
+ DOM 자체도 virtual DOM 이지만   DOM 의 Virtual DOM이 가상돔이다.
+ DOM의 버퍼 ? 정도로 보면될것같다.
+ 기본적으로 DOM은 트리형태로 이루어져 있는데, 노드의 수가 점점늘어나고 수정 요청이 잦으면  브라우저는 요청하는데로 수행하게 된다.
+ 그럴 경우 그 요청이 끝나기전까지 버퍼가 걸린다. 그 버퍼를 방지하기위해 사용되는것 같다.
+ 쉽게 생각하면 브라우저의 DOM과 렌더링을 위한 버퍼의 역할 이다.
+  
+ 
+ 
+ Vue.js
+데이터 바인딩의 기본형태 : 이중 중괄호(Mustache) 
+ex ) <span>메세지 : {{ message }} </span>
+
+Mustache 태그는 해당 데이터 객체의 message 속성값으로 대체 된다 .
+
+변경하고 싶지않을떄  v-once 속성사용
+ex )<span>메세지 : {{ message }} </span>
+
+html 속성을 적용해서 출력하고싶다면 ..
+ex ) <span v-html='rawhtml'></span>
+
+v-on의 약어  
+ex ) <a v-on:click='func'> ~~~</a>  - - >    <a @click = 'func'> ~~~</a>
+v-bind의 약어
+ex ) <a v-bind:href='www.naver.com'>~~</a>   - - >  <a :href='www.naver.com'></a>
+
