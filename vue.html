@@ -50,4 +50,52 @@ script 태그를 사용해 템플릿 블록 읽어 오기
 </script>
 
 
+render 옵션
+문자열을 전달하는 템플릿 대신 자바스크립트의 프로그래밍 기능을 활용할때 사용합니다. 컴포넌트 옵션(el,render,template)중 우선순위가 높습니다.
 
+사용예)
+Vue.component('render-acro',{
+    render:function(h){
+
+        return h(
+            'h1',this.$slot.default
+        )
+
+    }
+});
+
+parent 옵션
+ 선언한 컴포넌트 의 상위 Vue 컴포넌트를 설정하는데 사용합니다.
+ 
+ 사용예)
+ var parent_vm= new Vue({});
+
+ var child_vm = new Vue({
+     parent:parent_vm
+ });
+
+ mixins 옵션
+ mixins 옵션값은 객체 리터럴로 설정하며 객제 리터럴은 vue 인스턴스 옵션 및 뒤에서 설명하게 될 라이프사이클 이벤트 훅을 담아둔다.
+ 
+ 사용예)
+ var mixin = {
+     created:function(){console.log(1);},
+     data:{a:'hello'}
+ };
+
+ var vm = Vue({
+     created:function(){console.log(2)},
+     mixins:[mixin]
+     data:{a:'hello2'}
+
+ })
+
+ name 옵션
+ 옵션값으로 문자열 형태만 허용합니다
+
+ 사용예)
+ var vm = new Vue({
+     name:'Vue VM ROOT COMPONENT',
+     el:'div#hello'
+ });
+ 
