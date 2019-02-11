@@ -1,0 +1,53 @@
+<div id='ex1'>
+    {{ message }}
+</div>
+
+<script>
+    new Vue({
+        el:'#ex1',                //vue 인스턴스가 어떤html 템플릿을 인스턴스 템플릿으로 사용할 것인지 지정한다.
+        data:{
+            message:'Vue.js의 첫 예제 입니다 '  //vue 인스턴스에 있는 데이터 그룹을 객체 리터럴로 설정합니다.
+        }
+    });
+</script>
+
+props 옵션
+Vue.component('porps-simple',{
+    props:['msg','hello']
+
+});
+
+<porps-simple msg='메시지!' hello='입니다!'/>
+
+
+el 옵션 
+el옵션은 Vue 인스턴스가 동작할 DOM 엘리먼트를 지정할때 사용합니다.el은 Vue 템플릿을 컴파일 하는 시점에 Vue 컴포넌트가 생성한 DOM으로 대체되므로 
+html 엘리먼트와 body 엘리먼트를 Vue인스턴스의 el 옵션값으로 설정하는 것은 권하지 않습니다.
+
+사용예)
+    <script>
+        var vm = new Vue({
+            el:'div#markup'
+        });
+    </script>
+
+template 옵션
+template 옵션은 Vue 인스턴스의 마크업으로 사용할 문자열을 지정합니다.
+
+script 태그를 사용해 템플릿 블록 읽어 오기
+<script type="text/x-template" id='markup_tmpl'>    만들어둔 템플릿 
+    <p>hello, {{name}}</p>
+</script>
+
+
+<script>
+    var vm = new Vue({
+        data:{
+            name:'JOSEUNGYEON'
+        },
+        template:'#markup_tmpl'   //어떤 템플릿을 사용할지 설정합니다.
+    });
+</script>
+
+
+
