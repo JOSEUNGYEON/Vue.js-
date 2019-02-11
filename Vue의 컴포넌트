@@ -1,33 +1,72 @@
-컴포넌트를 사용한 작성방법( Vue 의 중요한 개념 )
- Vue에서 컴포넌트는  본질적으로 미리 정의된 옵션을 가진 Vue 인스턴스이다.
- 컴포넌트는 재사용이 가능하며 추상적 개념이다.
+Vue.js는 웹컴포넌트의 모든 규격을 완전히 준수하진 않지만 개발자가 html태그 방식으로 웹페이지안에 추가 UI를 덧붙일 수 있는 기능을 제공한다 . 이를 Vue 컴포넌트라고 한다.
+선언 위치에 따라 전역 컴포넌트와 지역 컴포넌트로 나뉘며 컴포넌트는 꼭 VUE 인스턴스나 다른 컴포넌트가 제공하는 템플릿에서만 사용할 수 있다.
 
 
-간단한 적용 예시 ) 
+전역 컴포넌트 생성
 
-
-<div id= 'com_ex'>
-	<component-count></component-count>  //user component
-	<component-count></component-count>
-	<component-count></component-count>
-</div>
-
-var data = { counter : 0}  // click 에 대해 리턴시킬 데이터 
-
-Vue.component('component-count',{   // 사용자 컴포넌트 이름 설정 
-	
-	template:'<button @click='counter+1'>{{ counter }}</button>',
-	data:function(){
-
-			return data
-
-	}
-
+Vue.component(<컴포넌트 이름>,{
+	//옵션
 })
+
+지역 컴포넌트 생성[이 경우 상위 컴포넌트에서만 사용할 수 있다.]
+new Vue({
+//초기화 옵션
+	component:{
+		<컴포넌트 이름>:<컴포넌트 옵션>
+	}
+});
+
+컴포넌트의 이름을 지을떄 다음을 주의해야 한다 .
+1) 컴포넌트 이름은 영어로 시작해야하며  대소문자를 포함 할수있다 .
+2)이떄 대문자는 소문자로 변경되며 대문자위치에 하이푼을 넣어줘야한다.
+ex) myComponent   -- >  my-component
+
+Vue 컴포넌트에 설정한 옵션 함수
+Vue.component('componetn',{
+	render:function(h){
+		return h('span','리턴 메세지입니다 .')
+	}
+})
+
+리터럴 전달받는 옵션의 종류 compute, watch ,methods
 
 new Vue({
-		el:'#example-2'
+	data:{
+		name:'Editor'
+	},
+	computed:{ 		//읽기 전용 속성이 만들어짐 
+		//객체의 이름 (merge_name)
+		merge_name:function(){
+			return 'TESTER LEE'
+		}
+	},
+	watch:{    //감시자 속성 [컴포넌트의 상태 또는 computed 속성값을 감지할수있다.]
+		name:function(new_value,origin_value){
 
+			//상태값이 바뀌었을떄 실행
+		}
+	}
 })
 
-prop을 이용해 하위 컴포넌트로 전달 
+데이터 바인딩 : 컴포넌트 템플릿에서 컴포넌트의 상태에 접근해서 연결 관계를 맺는 것을 말한다.
+
+
+<script src="https://unpkg.com/vue"></script>
+
+<div id = app>
+    <p v-bind:id='p_id'>{{ msg }} </p>
+    <p>지금 보고 계신 예제는 <strong>{{result}}</strong>입니다!</p>
+    <input type='text' name='result' v-model='result'>
+    </div>
+    <script>
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'반갑습니다.',
+            result:'컴포넌트!',
+            p_id:'p_tag_id'
+        }
+    });
+    </script>
+
+    input,textarea,select 속성은 html의 다른 태그와 달리 머스태시문법으로 바인딩할수 없다. 따라서 v-model를 이용해야한다.
