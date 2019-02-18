@@ -1,0 +1,110 @@
+<script>
+</script>
+
+옵션 
+Vue vm을 인스턴스화 할때는 Vue vm이 사용할 데이터 ,템플릿, 마운트할 DOM 엘리먼트 ,메서드 ,라이프 사이클 콜백등을 포함하는 객체 리터럴로 리턴해야한다.
+
+-data
+ : Vue 객체를 초기화한 이후에만 접근 가능 Vue 템플릿에 출력할 컴포넌트의 상태 값을 찾지 못하면 Vue 컴포넌트가  동작하지 않으므로 가장 중요하다 할수있다.
+  ex )
+    var vm = new Vue({
+        data:{
+            counter:0
+        }
+    });
+* Vue객체에 새로운 컴포넌트 상태를 추가할 수 없게 됩니다.
+
+-props
+ : 컴포넌트 태그의 속성이름을 리터럴 배열로 정의한다. 이때 컴포넌트 태그의 속성값은 상위 컴포넌트의 상태 값 또는 리터럴 값이다.
+ ex )
+    Vue.component('props-simple'{
+        props:['msg','hello']
+    });
+
+    <props-simple msg = 'example' hello= 'is success'/>
+
+-DOM
+ : Vue 컴포넌트는 기본적으로 DOM에 연결되어 동작하지만 DOM에 연결이 되지 않아도 동작한다.
+
+-el
+ : el은 Vue 인스턴스가 동작할 DOM 엘리먼트를 지정할때 사용한다. el에서 지정한 엘리먼트와 vue 인스턴스 연결을 '마운트'라 부른다.
+  el 옵션이 제공되지 않을 경우에는 $mount를 호출해 Vue 인스턴스가 특정 엘리먼트에서 동작할 수 있도록 해야한다.
+ex )
+     var vm = new VM({ el : "div#markup" });
+
+-template
+ : template은 Vue 인스턴스의 마크업으로 사용할 문자열을 지정한다.
+ex_1 ) 
+    <div id='markup'><h1>template_ex</h1></div>
+    <script>
+    var vm = new Vue({
+        el:'div#markup',
+        template:<h2>{{ msg }}</h2>,
+        data:{
+            markup:'마크업msg'
+        }
+    });
+    </script>
+
+ex_2 )
+    <script type='text/x_temp' id='markup-tep'>
+        <h1> {{ msg }}</h1>
+    </script>
+
+    <script>
+        var vm = new Vue({
+            data:{
+                msg : 'JSY'
+            },
+            template:'markup-tep'
+        });
+    </script>
+
+-render
+ : 문자열을 전달하는 템플릿 대신 자바스크립트의 프로그래밍 기능을 할용할 때 사용한다 .
+   render 옵션 안에서는 함수를 사용하며 , 인자로는 createElement메서드를 전달 받습니다.
+   컴포넌트에서 render의 우선순위가 el,template 보다 높기에 설정에 신중해야한다.
+
+ex ) 
+<script>
+    Vue.component('render',{
+        render:function(h){
+                    return h (
+                        'h1',this.$slot.default
+                    )
+                 }
+        });
+  </script>
+
+-애셋
+ :  Vue 컴포넌트 생성 시 해당 인스턴스가 사용할 애셋에 관환 정보를 전달할 수 있다. 
+    애셋 은 컴포넌트에서 문제를 발생시킬수 있는 데이터를 걸러내는 필터, 서브  콘텐츠를  추가할 수있는 컴포넌트가 있다.
+
+-parent ,child 옵션
+ :   상위 컴포넌트 설정시 사용
+ex ) 
+<script>
+        var parent_vm = new Vue({});
+        var child_vm = new Vue({
+            parent : parent_vm    --> 상위 컴포넌트를 지정해준다.
+        });
+</script>
+
+-mixunus
+ :  객체 리터럴로 설정하며 객체 리터럴은 Vue 인스턴스 옵션 및 뒤에서 설명하게 될 라이프사이클 이벤트 훅을 담아둡니다.
+ex )
+<script>
+    var mixin ={
+    create:function(){
+            console.log('믹스객체');   --> 먼저 실행후 
+        }
+    }
+    var vm = new Vue({
+        created: function(){
+                    console.log(호출!);  --> 실행됩니다.
+                },
+                muxins :[mixin]
+    });
+</script>
+    
+-name 
