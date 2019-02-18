@@ -1,0 +1,95 @@
+속성 보간법
+: 기본적으로 화면에 표시된 이미지의 경로나 링크를 변경하는등 html 태그의 속성을 사용해 화면의 상태 전환이 필요할때 상요한다.
+
+<div id='tempe'>
+        <a v-bind:href='link'>네이버</a>
+       </div>
+       
+       <script>
+       var app = new Vue({
+           el:'#tempe',
+           data:{
+               link:'https://www.naver.com'
+           }
+       });
+       </script>
+
+일회성 보간법
+브라우저의 DOM에 Vue 인스턴스의 데이터가 한번 표시되면 데이터가 변경되어도 DOM이 업데이트 되지 않습니다.
+
+<div id='tempe'>
+        <span v-once> 변경 불가 ! {{ msg }}</span>
+       </div>
+       
+       <script>
+       var app = new Vue({
+           el:'#tempe',
+           data:{
+               msg : '변경 불가합니다 .'
+           }
+       });
+       </script>
+
+<div id='tempe'>
+        <last-feed v-once :comment='msg'></last-feed>
+       </div>
+       
+       <script>
+       var app = new Vue({
+           el:'#tempe',
+           data:{
+               msg:'예제 테스트중입니다.'
+           },
+           components:{
+               'last-feed':{
+                   template:'<div>{{comment}}</div>',
+                   props : ['comment']
+               }
+           }
+       });
+       </script>
+
+
+html 보간법
+
+<div id='tempe'>
+        <div v-html='htmlt'></div>
+    </div>
+    
+    <script>
+    var app = new Vue({
+        el:'#tempe',
+        data:{
+            htmlt:'<b>v-html<b>'
+        }
+    
+        
+    });
+    </script>
+
+    
+템플릿 문법에서 사용하는 디렉티브
+
+v-model
+:이 디렉티브는 HTML 폼과 Vue 컴포넌트에 사용할 수 있는 특수 디렉티브이다. 폼관련 태그이외의 템플릿 코드에서는 동작하지않는다.
+
+<div id='tempe'>
+        <form method='post' action='/search'>
+            <label id='text_search'>검색어</label>
+            <input type='text' v-model='search_word' id='search_word'>
+            <input type='submit' value='찾기'>
+        </form>
+    </div>
+    
+    <script>
+    var app = new Vue({
+        el:'#tempe',
+        data:{
+            search_word:''
+        }
+    
+        
+    });
+    </script>
+
+
