@@ -108,3 +108,42 @@ ex )
 </script>
     
 -name 
+ :   옵션값을 문자열 형태만 허용한다.
+ ex ) 
+ <script>
+ var vm = new Vue({
+    name: "Vue vm Root Component",
+    el:'div#hello'
+ });
+ </script>
+
+-delimeters
+ :  상태값을 화면에 출력할때  사용하는 보간 기호를 바꾼다.
+ex )
+<script>
+ var vm = new Vue({
+     delimiters:['${','}']      -->  보간기호를 {{ }} 에서 ${ } 로 바꿈 
+ });
+ </script>
+
+-model
+ :   사용자가 생성한 컴포넌트를 v-model 디렉티브와 함꼐 사용할 때 porps 속성과 컴포넌트 이벤트를 사용할 수있도록 도와준다.
+ ex )
+    <script>
+        Vue.component('my_checkbox',{
+            model:{
+                prop:'checkd',
+                event:'change'
+            },  
+            props:{
+                value:String,
+                checked:{
+                    type:Number,
+                    default:0
+                }
+            },
+        });
+    </script>
+
+    <my_checkbox v-model='foo' value= 'some value'></my_checkbox>
+    
